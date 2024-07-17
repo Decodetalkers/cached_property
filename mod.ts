@@ -11,7 +11,7 @@
  *  constructor(public a: number) {
  *  }
  *
- *  @cached_property
+ *  \@cached_property
  *  tag() {
  *    return this.a + 10;
  *  }
