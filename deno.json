@@ -1,0 +1,6 @@
+{
+  "name": "@nobody/cached_property",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "tasks": {}
+}
