@@ -4,7 +4,7 @@
  * @example
  *
  * ```typescript
- * import cached_property from "@nobody/cached_property";
+ * import cached_property from "@nobody/cached-property";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * class CacheTestClass {
