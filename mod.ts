@@ -38,7 +38,7 @@ import { assert } from "@std/assert/assert";
 
 export function cached_property<T>(
   origin_Method: T,
-  context: ClassMethodDecoratorContext,
+  context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
 ): T {
   assert(!context.static);
   const name = context.name as string;
@@ -56,7 +56,7 @@ export function cached_property<T>(
 
 export function cached_static_property<T>(
   origin_Method: T,
-  context: ClassMethodDecoratorContext,
+  context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
 ): T {
   assert(context.static);
   // deno-lint-ignore no-explicit-any
