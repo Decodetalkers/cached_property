@@ -34,7 +34,7 @@
  * ```
  */
 
-import { assert } from "jsr:@std/assert/assert";
+import { assert } from "@std/assert/assert";
 
 export function cached_property<T>(
   origin_Method: T,
