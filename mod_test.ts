@@ -18,8 +18,25 @@ class CacheTestClass {
   }
 }
 
+class CacheTestClassSecond {
+  static b = 100;
+  constructor(public a: number) {
+  }
+
+  @cached_static_property
+  static tag_static() {
+    return CacheTestClassSecond.b + 10;
+  }
+
+  @cached_property
+  tag() {
+    return this.a + 10;
+  }
+}
+
 Deno.test(function testCache() {
   assertEquals(CacheTestClass.tag_static(), 20);
+  assertEquals(CacheTestClassSecond.tag_static(), 110);
 
   const cached_test = new CacheTestClass(10);
   assertEquals(cached_test.tag(), 20);
