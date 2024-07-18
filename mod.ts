@@ -11,7 +11,7 @@
  *  constructor(public a: number) {
  *  }
  *  \@cached_static_property
- *  static static_tag {
+ *  static static_tag() {
  *      return 10;
  *  }
  *  \@cached_property

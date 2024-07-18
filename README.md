@@ -9,11 +9,16 @@ I do not know if it is useful. it is my first typescript Decorator.
 ## Example
 
 ```ts
-import cached_property from "@nobody/cached_property";
+import { cached_property, static_cached_property } from "@nobody/cached_property";
 import { assertEquals } from "jsr:@std/assert";
 
 class CacheTestClass {
  constructor(public a: number) {
+ }
+
+ @static_cached_property
+ static static_tag() {
+  return 20;
  }
 
  @cached_property
