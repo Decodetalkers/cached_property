@@ -2,5 +2,8 @@
   "name": "@nobody/cached-property",
   "version": "0.2.0",
   "exports": "./mod.ts",
-  "tasks": {}
+  "tasks": {},
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.0"
+  }
 }
