@@ -4,13 +4,16 @@
  * @example
  *
  * ```typescript
- * import cached_property from "@nobody/cached-property";
+ * import { cached_property } from "@nobody/cached-property";
  * import { assertEquals } from "jsr:@std/assert";
  *
  * class CacheTestClass {
  *  constructor(public a: number) {
  *  }
- *
+ *  \@cached_static_property
+ *  static static_tag {
+ *      return 10;
+ *  }
  *  \@cached_property
  *  tag() {
  *    return this.a + 10;
@@ -31,10 +34,13 @@
  * ```
  */
 
-export default function cached_property<T>(
+import { assert } from "jsr:@std/assert/assert";
+
+export function cached_property<T>(
   origin_Method: T,
-  context: DecoratorContext,
+  context: ClassMethodDecoratorContext,
 ): T {
+  assert(!context.static);
   const name = context.name as string;
   const cached_data_name: string = "_cached_" + name;
   // deno-lint-ignore no-explicit-any
@@ -44,6 +50,24 @@ export default function cached_property<T>(
       this[cached_data_name] = (origin_Method as any).call(this, ...args);
     }
     return this[cached_data_name];
+  }
+  return replacementMethod as T;
+}
+
+export function cached_static_property<T>(
+  origin_Method: T,
+  context: ClassMethodDecoratorContext,
+): T {
+  assert(context.static);
+  // deno-lint-ignore no-explicit-any
+  let cache_data: any = undefined;
+  // deno-lint-ignore no-explicit-any
+  function replacementMethod(this: any, ...args: any[]) {
+    if (cache_data === undefined) {
+      // deno-lint-ignore no-explicit-any
+      cache_data = (origin_Method as any).call(this, ...args);
+    }
+    return cache_data;
   }
   return replacementMethod as T;
 }
