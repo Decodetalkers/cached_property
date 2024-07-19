@@ -36,6 +36,10 @@
 
 import { assert } from "@std/assert/assert";
 
+/**
+ * This is for none static function
+ * When the function is used, the value from the function will never change
+ */
 export function cached_property<T>(
   origin_Method: T,
   context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
@@ -54,6 +58,11 @@ export function cached_property<T>(
   return replacementMethod as T;
 }
 
+/**
+ * This is for static function
+ * When the function is used, the value from the function will never change,
+ * even you new a new class.
+ */
 export function cached_static_property<T>(
   origin_Method: T,
   context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
