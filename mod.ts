@@ -34,17 +34,16 @@
  * ```
  */
 
-import { assert } from "@std/assert/assert";
-
 /**
  * This is for none static function
  * When the function is used, the value from the function will never change
  */
 export function cached_property<T>(
   origin_Method: T,
-  context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
+  context: (ClassMethodDecoratorContext | ClassGetterDecoratorContext) & {
+    static: false;
+  },
 ): T {
-  assert(!context.static);
   const name = context.name as string;
   const cached_data_name: string = "_cached_" + name;
   // deno-lint-ignore no-explicit-any
@@ -65,9 +64,10 @@ export function cached_property<T>(
  */
 export function cached_static_property<T>(
   origin_Method: T,
-  context: ClassMethodDecoratorContext | ClassGetterDecoratorContext,
+  _context: (ClassMethodDecoratorContext | ClassGetterDecoratorContext) & {
+    static: true;
+  },
 ): T {
-  assert(context.static);
   // deno-lint-ignore no-explicit-any
   let cache_data: any = undefined;
   // deno-lint-ignore no-explicit-any
