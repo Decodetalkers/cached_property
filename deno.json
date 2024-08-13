@@ -1,6 +1,6 @@
 {
   "name": "@nobody/cached-property",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "exports": "./mod.ts",
   "tasks": {
     "publish": "deno publish"
